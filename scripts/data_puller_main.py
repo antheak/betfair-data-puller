@@ -13,6 +13,7 @@ import datetime
 from data_puller_logger import logger
 import traceback
 import os
+import sys
 
 
 # ------ CONSTANT VARIABLES -------
@@ -133,7 +134,7 @@ except Exception as inst:
     logger.error(type(inst))
     logger.error(inst.args)
     logger.error(traceback.format_exc())
-    sleep(LATENCY_PERIOD)
+    sys.exit()
 
 if __name__ == "__main__":
     main(BDP)
