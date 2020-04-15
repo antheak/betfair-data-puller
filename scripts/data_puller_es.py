@@ -15,7 +15,7 @@ import credentials
 es_host = 'elasticsearch:9200'
 WAIT_TIME = 30
 
-# Not very elegant, but this is v0 is resilient, and allows the betfair container to wait for the elastic one to bet
+# Not very elegant, but this is v0 is resilient, and allows the betfair container to wait for the elastic one to be
 # set up before launching
 sleep(WAIT_TIME)
 while True:
