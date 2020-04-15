@@ -109,8 +109,6 @@ def main(bdp):
                 logger.warning("Session expired. Reconnection to the API occurring...")
                 trading_local = betfair_data_puller.login()
                 bdp.restart(trading_local)
-                # TODO remove this line after testing ?
-                sleep(LATENCY_PERIOD)
 
             else:
                 count_error += 1
