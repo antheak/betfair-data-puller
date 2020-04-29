@@ -96,7 +96,8 @@ def main(bdp):
                     bdp.get_market_catalogues(market_type_codes=['MATCH_ODDS'])
                     bdp.update_market_ids()
             bdp.update_market_data()
-            bdp.write_data(runner_names_csv, market_info_csv, results_csv, market_data_csv, to_csv=True, to_es=True)
+            bdp.write_data(runner_names_csv, market_info_csv, results_csv, market_data_csv, to_csv=True,
+                           to_mysql=True, to_es=True)
             count += 1
             count_error = 0
             logger.info("Loop successfully ended with {} running market ids".format(len(bdp.market_ids)))

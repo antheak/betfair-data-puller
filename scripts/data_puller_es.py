@@ -23,5 +23,6 @@ while True:
         ep = es_pandas(es_host, http_auth=(credentials.elastic_username, credentials.elastic_password))
         break
     except :
+        print('error')
         logger.warning("Connection to elasticsearch impossible. Next try in {} seconds".format(WAIT_TIME))
         sleep(WAIT_TIME)

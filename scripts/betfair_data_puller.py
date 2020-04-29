@@ -12,6 +12,7 @@ import datetime
 import runnerbooks_processing
 import os
 from data_puller_logger import logger
+from data_puller_mysql import con
 from data_puller_es import ep
 
 
@@ -312,7 +313,8 @@ class BetfairDataPuller:
             logger.warning("Unable to get the result for game {}".format(market_book.market_id))
         return winner
 
-    def write_data(self, runner_names_csv, market_info_csv, results_csv, market_data_csv, to_csv=True, to_es=False):
+    def write_data(self, runner_names_csv, market_info_csv, results_csv, market_data_csv, to_csv=True, to_mysql=True,
+                   to_es=False):
         len_data_written = len(self.runner_names_df) + len(self.market_info_df) + len(self.results_df) +\
                            len(self.market_data_df)
 
@@ -327,6 +329,12 @@ class BetfairDataPuller:
             ep.to_es(self.market_info_df, index='data-market-info')
             ep.to_es(self.results_df, index='data-results')
             ep.to_es(self.market_data_df, index='data-market-data')
+
+        if to_mysql:
+            self.runner_names_df.to_sql('runnerNames', con, if_exists='append', index=False)
+            self.market_info_df.to_sql('marketInfo', con, if_exists='append', index=False)
+            self.results_df.to_sql('results', con, if_exists='append', index=False)
+            self.market_data_df.to_sql('marketData', con, if_exists='append', index=False)
 
         self.runner_names_df = pd.DataFrame()
         self.market_info_df = pd.DataFrame()
