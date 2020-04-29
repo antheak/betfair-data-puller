@@ -182,6 +182,8 @@ class BetfairDataPuller:
         current_runner_names_df = current_runner_names_df.loc[
             current_runner_names_df['Selection ID'] != 58805.0
             ]
+        print(self.runner_names_df)
+        print(current_runner_names_df)
         self.runner_names_df = self.runner_names_df.append(current_runner_names_df)
 
     @property
@@ -331,6 +333,11 @@ class BetfairDataPuller:
             ep.to_es(self.market_data_df, index='data-market-data')
 
         if to_mysql:
+            self.runner_names_df.columns = [x.replace(' ', '') for x in self.runner_names_df.columns]
+            self.market_info_df.columns = [x.replace(' ', '') for x in self.market_info_df.columns]
+            self.results_df.columns = [x.replace(' ', '') for x in self.results_df.columns]
+            self.market_data_df.columns = [x.replace(' ', '') for x in self.market_data_df.columns]
+            print(self.runner_names_df.columns)
             self.runner_names_df.to_sql('runnerNames', con, if_exists='append', index=False)
             self.market_info_df.to_sql('marketInfo', con, if_exists='append', index=False)
             self.results_df.to_sql('results', con, if_exists='append', index=False)
