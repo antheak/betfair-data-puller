@@ -1,3 +1,3 @@
 [submodule "docker-elk"]
-	path = docker-elk
+	path = docker
 	url = https://github.com/antheak/docker-elk.git
