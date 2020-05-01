@@ -9,7 +9,6 @@ Created on Mar 17 2020
 import betfair_data_puller
 from time import sleep
 import pandas as pd
-import datetime
 from data_puller_logger import logger
 import traceback
 import os
