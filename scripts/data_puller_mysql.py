@@ -27,7 +27,6 @@ sleep(WAIT_TIME)
 while True:
     try:
         con = create_engine(connection_string).connect()
-        print("connection succeed")
         break
     except Exception as inst:
         logger.warning("Connection to mysql impossible. Next try in {} seconds".format(WAIT_TIME))
